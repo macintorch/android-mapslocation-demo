@@ -83,6 +83,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Toast.makeText(MapsActivity.this,location.toString(),Toast.LENGTH_LONG).show();
 
+                 LatLng userLocation = new LatLng(location.getLatitude(),location.getAltitude());
+                mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
+
             }
 
             @Override
@@ -115,11 +118,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        // Add a marker in Sydney and move the camera
-
-
-       // LatLng sydney = new LatLng(-34, 151);
-       // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
     }
 
