@@ -83,8 +83,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Toast.makeText(MapsActivity.this,location.toString(),Toast.LENGTH_LONG).show();
 
-                 LatLng userLocation = new LatLng(location.getLatitude(),location.getAltitude());
+                 LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
 
             }
 
@@ -115,6 +117,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             } else {
                 // we have permission
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+
+                LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(),lastKnownLocation.getAltitude());
+                mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
             }
         }
 
